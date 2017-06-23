@@ -1,0 +1,15 @@
+{
+	"id": 1,
+	"nachname": "Brenner",
+	"vorname": "Jonas",
+	"coins": 123,
+	"deliverys": 3,
+	"pickUp_person": {
+		"lat": 80.12304846,
+		"lng": 7.123984211
+	},
+	"car_parking": {
+		"lat": 82.14104846,
+		"lng": 8.100984211
+	}
+} 
