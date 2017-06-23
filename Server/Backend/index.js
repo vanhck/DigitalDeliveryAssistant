@@ -6,11 +6,6 @@ var googleMapsClient = require('@google/maps').createClient({
 
 const app = express();
 
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-});
-
 app.get('/', function (req, res) {
 	googleMapsClient.distanceMatrix(
 		{
