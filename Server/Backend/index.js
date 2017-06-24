@@ -36,9 +36,11 @@ app.get('/', function (req, res) {
 
 app.get('/isUpdate', function (req, res) {
 	res.send(dataUpdated);
+	dataUpdated = false;
 })
-app.post('/update', function (req, res) {
-	res.send(dataUpdated);
+app.get('/update', function (req, res) {
+	dataUpdated = true;
+	res.send("data updated.");
 })
 	
 app.get('/customerData', function (req, res) {
