@@ -55,7 +55,6 @@ app.get('/update/:id/:status', function (req, res) {
 
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
-  console.log(req.body) // populated!
   next()
 })
 app.post("/addOnTheGoPackage", function(req, res){
@@ -267,7 +266,7 @@ app.get('/destinations', function (req, res) {
 				id :result[i].ID,
 				name :result[i].NACHNAME,
 				vorname :result[i].NAME,
-				strasse :result[i].STRASSE + " " + result[i].HAUS_NR ,
+				strasse : result[i].addresse_on_the_go ? result[i].addresse_on_the_go : result[i].STRASSE + " " + result[i].HAUS_NR ,
 				postleitzahl :result[i].PLZ,
 				ort :result[i].WOHNORT,
 				status: result[i].STATUS,
