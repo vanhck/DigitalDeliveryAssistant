@@ -299,7 +299,6 @@ app.get('/driverStatus/:lat?/:lng?', function (req, res) {
 				longitude :result[i].ABLAGEORG_LNG,
 				driver :'Hacker Klaus'
 			});
-			console.log(resData)
 			destinations.push({"i":result[i].ID,"dest":result[i].WOHNORT + " " + result[i].STRASSE+ " " + result[i].HAUS_NR});
 		}
 		calculateDestinations(destinations, resData);
