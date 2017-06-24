@@ -35,7 +35,7 @@ app.get('/', function (req, res) {
 })
 
 app.get('/update/:id/:status', function (req, res) {
-	//dataUpdated = true;
+	dataUpdated = true;
 	console.log("update called.");
 	callback = function(response){
 		res.send(response);
