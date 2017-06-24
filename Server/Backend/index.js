@@ -57,6 +57,29 @@ app.use(bodyParser.json());
 app.use(function (req, res, next) {
   next();
 })
+
+app.get('/updateTarget/:id/:addresse_on_the_go', function (req, res) {
+	dataUpdated = true;
+	console.log("update target called.");
+	callback = function(response){
+		res.send(response);
+	}
+	console.log(req.params.id  + " " + req.params.status);
+	con.query("UPDATE `stack` SET `addresse_on_the_go` = \"" + req.params.addresse_on_the_go + "\" WHERE `id` = \"" +req.params.id +"\"", function (err, result) {
+		if(err){
+			callback(err);
+		}else{
+			callback("success");
+		}
+		
+	})
+})
+
+app.use(bodyParser.json());
+app.use(function (req, res, next) {
+  next();
+})
+
 app.post("/addOnTheGoPackage", function(req, res){
 	console.log(req.body);
 	dataUpdated = true;
