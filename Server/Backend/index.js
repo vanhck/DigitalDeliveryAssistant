@@ -279,7 +279,7 @@ app.get('/driverStatus/:lat?/:lng?', function (req, res) {
 			}
 		);
 	}
-	con.query("SELECT stack.addresse_on_the_go as `OP`, * FROM empfeanger INNER JOIN stack ON empfeanger.id = stack.empfeanger_id", function (err, result) {
+	con.query("SELECT * FROM empfeanger INNER JOIN stack ON empfeanger.id = stack.empfeanger_id", function (err, result) {
 		var resData = [];
 		var destinations = [];
 		for(var i = 0; i < result.length; i++){
@@ -299,6 +299,7 @@ app.get('/driverStatus/:lat?/:lng?', function (req, res) {
 				longitude :result[i].ABLAGEORG_LNG,
 				driver :'Hacker Klaus'
 			});
+			console.log(resData);
 			destinations.push({"i":result[i].ID,"dest":result[i].WOHNORT + " " + result[i].STRASSE+ " " + result[i].HAUS_NR});
 		}
 		calculateDestinations(destinations, resData);
