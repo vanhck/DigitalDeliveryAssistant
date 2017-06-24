@@ -34,6 +34,23 @@ app.get('/', function (req, res) {
 	);
 })
 
+app.get('/update/:id/:status', function (req, res) {
+	//dataUpdated = true;
+	console.log("update called.");
+	callback = function(response){
+		res.send(response);
+	}
+	console.log(req.params.id  + " " + req.params.status);
+	con.query("UPDATE `stack` SET `status` = \"" + req.params.status + "\" WHERE `id` = \"" +req.params.id +"\"", function (err, result) {
+		if(err){
+			callback(err);
+		}else{
+			callback("success");
+		}
+		
+	})
+})
+
 app.get('/isUpdate', function (req, res) {
 	res.send(dataUpdated);
 	dataUpdated = false;
@@ -225,6 +242,7 @@ app.get('/destinations', function (req, res) {
 				strasse :result[i].STRASSE + " " + result[i].HAUS_NR ,
 				postleitzahl :result[i].PLZ,
 				ort :result[i].WOHNORT,
+				status: result[i].STATUS,
 				date :"2017-06-24",
 				predicted :"2017-06-24T00:46:28.000Z",
 				estimated :"2017-06-24T00:46:28.000Z",
@@ -237,6 +255,6 @@ app.get('/destinations', function (req, res) {
 	})
 })
 
-app.listen(3000, function () {
+app.listen(3000, function () { 
   console.log('Server listening on port 3000!')
 })
