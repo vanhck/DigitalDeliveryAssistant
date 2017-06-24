@@ -69,7 +69,7 @@ app.post("/addOnTheGoPackage", function(req, res){
 		""+ req.body.parkhinweis_lng + ","+
 		"\""+ "pending" + "\","+
 		"\""+ "2017-06-24 16:45:38" + "\","+
-		"\""+ "0000-00-00 00:00:01" + "\","+
+		"\""+ "2017-08-10 06:18:20" + "\","+
 		"\""+ req.body.addresse_on_the_go + "\""+
 		")", function (err, result) {
 			console.log(err);
