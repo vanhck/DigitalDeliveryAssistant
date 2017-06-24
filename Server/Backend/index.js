@@ -1,4 +1,6 @@
-const express = require('express')
+const express = require('express');
+var bodyParser = require('body-parser');
+
 var mysql = require('mysql');
 var googleMapsClient = require('@google/maps').createClient({
   key:'AIzaSyDvKst18hM40EO98NeMeEFNxRnbegx_kQI'
@@ -50,6 +52,32 @@ app.get('/update/:id/:status', function (req, res) {
 		
 	})
 })
+
+app.use(bodyParser.json());
+app.use(function (req, res, next) {
+  console.log(req.body) // populated!
+  next()
+})
+app.post("/addOnTheGoPackage", function(req, res){
+	//req.body.
+	dataUpdated = true;
+	con.query(
+		"INSERT INTO `stack`( `EMPFEANGER_ID`, `ABLAGEORG_LAT`, `ABLAGEORG_LNG`, `PARKHINWEIS_LAT`, `PARKHINWEIS_LNG`, `STATUS`, `APPRAISED_ARRIVAL`, `ACTUAL_ARRIVAL`, `addresse_on_the_go`) VALUES ("+
+		""+ req.body.empfeanger_id + ","+
+		""+ req.body.ablageort_lat + ","+
+		""+ req.body.ablageort_lng + ","+
+		""+ req.body.parkhinweis_lat + ","+
+		""+ req.body.parkhinweis_lng + ","+
+		"\""+ "pending" + "\","+
+		"\""+ "2017-06-24 16:45:38" + "\","+
+		"\""+ "0000-00-00 00:00:1" + "\","+
+		"\""+ req.body.addresse_on_the_go + "\""+
+		")", function (err, result) {
+			console.log(err);
+		});
+
+	res.send("sucess");
+});
 
 app.get('/isUpdate', function (req, res) {
 	res.send(dataUpdated);
