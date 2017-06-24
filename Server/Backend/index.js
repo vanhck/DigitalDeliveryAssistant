@@ -287,10 +287,9 @@ app.get('/driverStatus/:lat?/:lng?', function (req, res) {
 				id :result[i].ID,
 				name :result[i].NACHNAME,
 				vorname :result[i].NAME,
-				strasse : result[i].ADDR ? result[i].ADDR : result[i].STRASSE + " " + result[i].HAUS_NR ,
-				ADDR:result[i].ADDR,
-				postleitzahl : result[i].ADDR ? "" : result[i].PLZ,
-				ort : result[i].ADDR ? "" : result[i].WOHNORT,
+				strasse : result[i].addresse_on_the_go ? result[i].addresse_on_the_go : result[i].STRASSE + " " + result[i].HAUS_NR ,
+				postleitzahl : result[i].addresse_on_the_go ? "" : result[i].PLZ,
+				ort : result[i].addresse_on_the_go ? "" : result[i].WOHNORT,
 				status: result[i].STATUS,
 				date :"2017-06-24",
 				predicted :"2017-06-24T00:46:28.000Z",
@@ -299,7 +298,6 @@ app.get('/driverStatus/:lat?/:lng?', function (req, res) {
 				longitude :result[i].ABLAGEORG_LNG,
 				driver :'Hacker Klaus'
 			});
-			console.log(resData)
 			destinations.push({"i":result[i].ID,"dest":result[i].WOHNORT + " " + result[i].STRASSE+ " " + result[i].HAUS_NR});
 		}
 		calculateDestinations(destinations, resData);
@@ -318,9 +316,9 @@ app.get('/destinations', function (req, res) {
 				id :result[i].ID,
 				name :result[i].NACHNAME,
 				vorname :result[i].NAME,
-				strasse : result[i].ADDR ? result[i].ADDR : result[i].STRASSE + " " + result[i].HAUS_NR ,
-				postleitzahl : result[i].ADDR ? "" : result[i].PLZ,
-				ort : result[i].ADDR ? "" : result[i].WOHNORT,
+				strasse : result[i].addresse_on_the_go ? result[i].addresse_on_the_go : result[i].STRASSE + " " + result[i].HAUS_NR ,
+				postleitzahl : result[i].addresse_on_the_go ? "" : result[i].PLZ,
+				ort : result[i].addresse_on_the_go ? "" : result[i].WOHNORT,
 				status: result[i].STATUS,
 				date :"2017-06-24",
 				predicted :"2017-06-24T00:46:28.000Z",
