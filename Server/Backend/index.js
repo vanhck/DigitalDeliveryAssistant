@@ -5,6 +5,7 @@ var googleMapsClient = require('@google/maps').createClient({
 });
 
 const app = express();
+dataUpdated = false;
 
 var con = mysql.createConnection({
   host: "localhost",
@@ -33,7 +34,12 @@ app.get('/', function (req, res) {
 	);
 })
 
-
+app.get('/isUpdate', function (req, res) {
+	res.send(dataUpdated);
+})
+app.post('/update', function (req, res) {
+	res.send(dataUpdated);
+})
 	
 app.get('/customerData', function (req, res) {
 	//res.send(req.params.customerId);
