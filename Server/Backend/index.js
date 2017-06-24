@@ -55,10 +55,10 @@ app.get('/update/:id/:status', function (req, res) {
 
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
-  next()
+  next();
 })
 app.post("/addOnTheGoPackage", function(req, res){
-	//req.body.
+	console.log(req.body);
 	dataUpdated = true;
 	con.query(
 		"INSERT INTO `stack`( `EMPFEANGER_ID`, `ABLAGEORG_LAT`, `ABLAGEORG_LNG`, `PARKHINWEIS_LAT`, `PARKHINWEIS_LNG`, `STATUS`, `APPRAISED_ARRIVAL`, `ACTUAL_ARRIVAL`, `addresse_on_the_go`) VALUES ("+
