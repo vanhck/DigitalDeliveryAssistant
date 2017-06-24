@@ -288,6 +288,7 @@ app.get('/driverStatus/:lat?/:lng?', function (req, res) {
 				name :result[i].NACHNAME,
 				vorname :result[i].NAME,
 				strasse : result[i].addresse_on_the_go ? result[i].addresse_on_the_go : result[i].STRASSE + " " + result[i].HAUS_NR ,
+				addresse_on_the_go:result[i].addresse_on_the_go,
 				postleitzahl : result[i].addresse_on_the_go ? "" : result[i].PLZ,
 				ort : result[i].addresse_on_the_go ? "" : result[i].WOHNORT,
 				status: result[i].STATUS,
@@ -298,6 +299,7 @@ app.get('/driverStatus/:lat?/:lng?', function (req, res) {
 				longitude :result[i].ABLAGEORG_LNG,
 				driver :'Hacker Klaus'
 			});
+			console.log(resData)
 			destinations.push({"i":result[i].ID,"dest":result[i].WOHNORT + " " + result[i].STRASSE+ " " + result[i].HAUS_NR});
 		}
 		calculateDestinations(destinations, resData);
