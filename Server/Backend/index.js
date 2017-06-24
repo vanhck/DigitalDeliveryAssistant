@@ -279,12 +279,14 @@ app.get('/driverStatus/:lat?/:lng?', function (req, res) {
 			}
 		);
 	}
-	con.query("SELECT * FROM empfeanger INNER JOIN stack ON empfeanger.id = stack.empfeanger_id", function (err, result) {
+	con.query("SELECT stack.id, stack.STATUS, stack.addresse_on_the_go, `e`.PLZ, `e`.NACHNAME, `e`.NAME, `e`.STRASSE, `e`.HAUS_NR  FROM empfeanger as `e` INNER JOIN stack ON `e`.id = stack.empfeanger_id", function (err, result) {
+		//console.log("SELECT stack.id, stack.STATUS, stack.addresse_on_the_go, `e`.PLZ, `e`.NACHNAME, `e`.NAME, `e`.STRASSE, `e`.HAUS_NR,  FROM empfeanger as `e` INNER JOIN stack ON `e`.id = stack.empfeanger_id");
+		//console.log(err);
 		var resData = [];
 		var destinations = [];
 		for(var i = 0; i < result.length; i++){
 			resData.push({
-				id :result[i].ID,
+				id :result[i].id,
 				name :result[i].NACHNAME,
 				vorname :result[i].NAME,
 				strasse : result[i].addresse_on_the_go ? result[i].addresse_on_the_go : result[i].STRASSE + " " + result[i].HAUS_NR ,
@@ -295,10 +297,13 @@ app.get('/driverStatus/:lat?/:lng?', function (req, res) {
 				date :"2017-06-24",
 				predicted :"2017-06-24T00:46:28.000Z",
 				estimated :"2017-06-24T00:46:28.000Z",
-				latitude :result[i].ABLAGEORG_LAT,
-				longitude :result[i].ABLAGEORG_LNG,
+				latitude :0,
+				longitude :0,
 				driver :'Hacker Klaus'
 			});
+			console.log("data1");
+			console.log(result[i]);
+			console.log("data2");
 			console.log(resData);
 			destinations.push({"i":result[i].ID,"dest":result[i].WOHNORT + " " + result[i].STRASSE+ " " + result[i].HAUS_NR});
 		}
@@ -315,7 +320,7 @@ app.get('/destinations', function (req, res) {
 		var resData = [];
 		for(var i = 0; i < result.length; i++){
 			resData.push({
-				id :result[i].ID,
+				id :result[i].id,
 				name :result[i].NACHNAME,
 				vorname :result[i].NAME,
 				strasse : result[i].addresse_on_the_go ? result[i].addresse_on_the_go : result[i].STRASSE + " " + result[i].HAUS_NR ,
