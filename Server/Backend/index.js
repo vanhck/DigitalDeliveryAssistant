@@ -138,13 +138,29 @@ app.get('/driverStatus/:lat?/:lng?', function (req, res) {
 	callback = function(response){
 		res.send(response);
 	}
-	calculateDestinations = function(destinations){
+	calculateDestinations = function(destinations, data){
 		//destinations.push("Wiesloch Albert-Schweitzer-Schtrasse 02");
 		console.log(destinations);
+		destins = [];
+		getIndex = function(dest){
+			for(var i = 0; i < destins.length; i++){
+				if (dest == destinations[i].dest){
+					return destinations[i].i;
+				}
+			}
+			return "null";
+		}
+		
+		for (var i = 0; i < destinations.length; i++){
+			destins.push(destinations[i].dest);
+		}
+		console.log("destins");
+		console.log(destins);
+		 
 		googleMapsClient.distanceMatrix(
 			{
-				origins: destinations,
-				destinations: destinations,
+				origins: destins,
+				destinations: destins,
 				language: 'de',
 				units: 'metric',
 				region: 'au'
@@ -183,6 +199,7 @@ app.get('/driverStatus/:lat?/:lng?', function (req, res) {
 			var possibilities = [];
 			for(var i = 0; i < response.json.destination_addresses.length; i++){
 				possibilities.push({"i":i,"description":response.json.destination_addresses[i]});
+				destinations[i].dest = response.json.destination_addresses[i];
 			}
 				
 				kombiX = [];
@@ -240,6 +257,7 @@ app.get('/driverStatus/:lat?/:lng?', function (req, res) {
 				for(var i = 0; i < best.points.length;i++){
 					var futureDate = new Date(Date.now() + (1000*best.points[i].score%60 /*sec*/ * 60*best.points[i].score/60 /*min*/ * 60*best.points[i].score/3600))
 					destinations_fastest.push({
+						"i" : getIndex(best.points[i].description),
 						"feasibilityScore":best.score,
 						"description":best.points[i].description,
 						"time" : best.points[i].time,
@@ -248,6 +266,14 @@ app.get('/driverStatus/:lat?/:lng?', function (req, res) {
 						"estimated_arrival_time":best.points[i].score? futureDate.getFullYear() + "-" + (futureDate.getMonth()+1) + "-" + futureDate.getDate() + "T" + futureDate.getHours() + ":" + futureDate.getMinutes() + ":" + date.getSeconds() : "",
 						"appraised_arrivalTime":"2017-06-24T" +(12*i) +":45:12"
 						});
+				}
+				for(var i = 0 ; i < destinations_fastest.length; i++){
+					for(var x = 0; x < data.length; x++){
+						if(destinations_fastest[i].i == data[x].id){
+							destinations_fastest[i].data = data[x];
+							break;
+						}
+					}
 				}
 				callback(destinations_fastest);
 			}
@@ -271,9 +297,9 @@ app.get('/driverStatus/:lat?/:lng?', function (req, res) {
 				longitude :result[i].ABLAGEORG_LNG,
 				driver :'Hacker Klaus'
 			});
-			destinations.push(result[i].WOHNORT + " " + result[i].STRASSE+ " " + result[i].HAUS_NR);
+			destinations.push({"i":result[i].ID,"dest":result[i].WOHNORT + " " + result[i].STRASSE+ " " + result[i].HAUS_NR});
 		}
-		calculateDestinations(destinations);
+		calculateDestinations(destinations, resData);
 	})
 })
 
