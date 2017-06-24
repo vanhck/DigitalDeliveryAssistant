@@ -1,0 +1,5 @@
+INSERT INTO `empfeanger` (`ID`, `NAME`, `NACHNAME`, `STRASSE`, `HAUS_NR`, `WOHNORT`, `PLZ`) VALUES
+('1', 'Dimtrios', 'Makridis', 'Albert-Schzeitzer-Strasse', '7', 'Wiesloch', '69168'),
+('2', 'Peter', 'König', 'Gottlieb Daimler', '14', 'Stuttgart', '65190'),
+('3', 'Jonas', 'Aschenbrenner', 'Sandbrunnenweg', '1', 'Wiesloch', '69190'),
+('4', 'Baller', 'Mann', 'Dietmar-Hopp-Alle', '16', 'Walldorf', '69190');

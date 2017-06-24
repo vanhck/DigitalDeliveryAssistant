@@ -1,0 +1,45 @@
+this.stack = [
+      {
+        id 1,
+        name 'König',
+        vorname 'Peter',
+        strasse 'Gottlieb Daimler Straße 14',
+        postleitzahl '65190',
+        ort 'Stuttgart',
+        date '23.06.2017',
+        predicted '2345',
+        estimated '2351',
+        latitude 49.010655,
+        longitude 8.423468,
+        driver 'Hacker Klaus'
+      },
+      {
+        id 1,
+        name 'Aschenbrenner',
+        vorname 'Jonas',
+        strasse 'Sandbrunnenweg 1',
+        postleitzahl '69190',
+        ort 'Wiesloch',
+        date '24.06.2017',
+        predicted '0011',
+        estimated '0009',
+        latitude 49.15645,
+        longitude 8.564168,
+        driver 'Hacker Klaus'
+      },
+      {
+        id 1,
+        name 'Mann',
+        vorname 'Baller',
+        strasse 'Dietmar-Hopp-Allee 16',
+        ort 'Walldorf',
+        postleitzahl '69190',
+        date '24.06.2017',
+        predicted '0145',
+        estimated '0551',
+        latitude 49.15645,
+        longitude 8.564168,
+        driver 'Hacker Klaus'
+      }
+
+    ]
